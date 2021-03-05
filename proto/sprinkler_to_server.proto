@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+option go_package = "github.com/ejweber/webersprinkler2/pkg/api";
+
+import "proto/common.proto";
+
+service SprinklerToServer {
+    rpc SendStatus(SprinklerStatusRequest) returns (SprinklerStatusResponse);
+    rpc GetProgram(GetProgramRequest) returns (GetProgramResponse);
+    rpc GetScheduledPrograms(GetScheduledProgramsRequest) returns (GetScheduledProgramsResponse);
+    rpc RecieveCommands(RecieveCommandsRequest) returns (stream Command);
+}
+
+message SprinklerStatusRequest {
+    SprinklerStatus sprinkler_status = 1;
+}
+
+message SprinklerStatusResponse {
+    // intentionally empty
+}
+
+message GetProgramRequest {
+    Program program = 1;
+}
+
+message GetProgramResponse {
+    Program program = 1;
+}
+
+message GetScheduledProgramsRequest {
+    // intentionally empty
+}
+
+message GetScheduledProgramsResponse {
+    repeated ScheduledProgram scheduled_programs = 1;
+}
+
+message RecieveCommandsRequest {
+    // intentionally empty
+}
+
+message SprinklerStatus {
+    // todo
+}
+
+message Command {
+    oneof command {
+        StartCommand start = 1;
+        StopCommand stop = 2;
+        UpdateScheduledProgramsCommand update_scheduled_programs = 3;
+    }
+}
+
+message StartCommand {
+    oneof type {
+        Program program = 1;
+        ZoneTime zone_time = 2;
+    }
+}
+
+message StopCommand {
+    // intentionally empty
+}
+
+message UpdateScheduledProgramsCommand {
+    // intentionally empty
+}
