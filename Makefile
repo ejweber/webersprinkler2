@@ -7,7 +7,7 @@ build: generate
 
 .PHONY: generate
 generate:
-	protoc --go_out=. --go_opt=module=github.com/ejweber/webersprinkler2 proto/*
+	protoc --go_out=. --go-grpc_out=. --go-grpc_opt=module=github.com/ejweber/webersprinkler2 --go_opt=module=github.com/ejweber/webersprinkler2 proto/*
 
 .PHONY: clean
 clean:
